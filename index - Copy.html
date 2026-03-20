@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sri Online Mart - Login</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
+}
+
+body{
+margin:0;
+font-family:Arial, Helvetica, sans-serif;
+background:whitesmoke;
+background-size:400% 400%;
+animation:gradientBG 10s ease infinite;
+height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+}
+
+@keyframes gradientBG{
+0%{background-position:0% 50%;}
+50%{background-position:100% 50%;}
+100%{background-position:0% 50%;}
+}
+.container{
+width:850px;
+height:500px;
+display:flex;
+border-radius:10px;
+overflow:hidden;
+box-shadow:0 10px 30px rgba(0,0,0,0.3);
+background:white;
+}
+
+.left{
+width:40%;
+background:#2874f0;
+color:white;
+padding:50px;
+display:flex;
+flex-direction:column;
+justify-content:center;
+}
+
+.left h1{
+font-size:32px;
+margin-bottom:20px;
+}
+
+.left p{
+line-height:1.6;
+}
+
+.right{
+width:60%;
+padding:50px;
+display:flex;
+flex-direction:column;
+justify-content:center;
+}
+
+.right h2{
+margin-bottom:30px;
+}
+
+.input-group{
+position:relative;
+margin-bottom:25px;
+}
+
+.input-group input{
+width:100%;
+padding:12px;
+border:none;
+border-bottom:2px solid #ccc;
+font-size:16px;
+outline:none;
+}
+
+.input-group label{
+position:absolute;
+left:0;
+top:12px;
+color:#999;
+font-size:14px;
+transition:0.3s;
+}
+
+.input-group input:focus + label,
+.input-group input:valid + label{
+top:-10px;
+font-size:12px;
+color:#2874f0;
+}
+
+.show-password{
+position:absolute;
+right:10px;
+top:12px;
+cursor:pointer;
+font-size:14px;
+color:#555;
+}
+
+button{
+width:100%;
+padding:12px;
+background:#fb641b;
+border:none;
+color:white;
+font-size:16px;
+border-radius:5px;
+cursor:pointer;
+transition:0.3s;
+}
+
+button:hover{
+background:#e65a15;
+transform:scale(1.03);
+}
+
+.link{
+margin-top:20px;
+text-align:center;
+}
+
+.link a{
+text-decoration:none;
+color:#2874f0;
+}
+
+.error{
+color:red;
+font-size:13px;
+margin-top:5px;
+display:none;
+}
+
+@media(max-width:768px){
+
+.container{
+flex-direction:column;
+height:auto;
+width:90%;
+}
+
+.left{
+width:100%;
+text-align:center;
+}
+
+.right{
+width:100%;
+}
+
+
+}
+
+</style>
+</head>
+<script src="cart.js"></script>
+<body>
+
+<div class="container">
+
+<div class="left">
+
+<h1>Sri Online Mart</h1>
+
+<p>
+Login to access your orders, wishlist, and latest offers.
+Experience the future of online shopping.
+</p>
+
+</div>
+
+
+<div class="right">
+
+<h2>Login</h2>
+
+<form id="loginForm" action="main.html">
+
+<div class="input-group">
+<input type="text" id="email" required>
+<label>Email / Mobile</label>
+<div class="error" id="emailError">Enter valid email or mobile</div>
+</div>
+
+<div class="input-group">
+<input type="password" id="password" required>
+<label>Password</label>
+<span class="show-password" onclick="togglePassword()">Show</span>
+<div class="error" id="passError">Password must be 6 characters</div>
+</div>
+
+<button type="submit">Login</button>
+
+<div class="link">
+<a href="#">New user? Create an account</a>
+</div>
+
+</form>
+
+</div>
+
+</div>
+
+
+<script>
+
+function togglePassword(){
+
+let pass=document.getElementById("password");
+
+if(pass.type==="password"){
+pass.type="text";
+}else{
+pass.type="password";
+}
+
+}
+
+
+document.getElementById("loginForm").addEventListener("submit",function(e){
+
+let email=document.getElementById("email").value;
+let pass=document.getElementById("password").value;
+
+let valid=true;
+
+if(email.length<5){
+document.getElementById("emailError").style.display="block";
+valid=false;
+}else{
+document.getElementById("emailError").style.display="none";
+}
+
+if(pass.length<6){
+document.getElementById("passError").style.display="block";
+valid=false;
+}else{
+document.getElementById("passError").style.display="none";
+}
+
+if(!valid){
+e.preventDefault();
+}
+
+});
+
+</script>
+
+</body>
+</html>

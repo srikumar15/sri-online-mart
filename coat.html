@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<title>Sri Online Mart</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<style>
+
+body{
+font-family:Arial;
+margin:0;
+background:#f1f3f6;
+}
+
+
+
+header{
+background:#2874f0;
+color:white;
+padding:15px;
+text-align:center;
+font-size:22px;
+font-weight:bold;
+}
+
+
+
+.container{
+display:flex;
+flex-wrap:wrap;
+max-width:1000px;
+margin:auto;
+background:white;
+margin-top:20px;
+padding:20px;
+}
+
+
+.images{
+flex:1;
+text-align:center;
+}
+
+.images img{
+width:250px;
+border-radius:10px;
+}
+
+.gallery{
+margin-top:10px;
+}
+
+.gallery img{
+width:60px;
+margin:5px;
+cursor:pointer;
+border:2px solid transparent;
+}
+
+.gallery img:hover{
+border:2px solid #2874f0;
+}
+
+
+
+.details{
+flex:1;
+padding:20px;
+}
+
+.hot{
+background:green;
+color:white;
+padding:5px 10px;
+border-radius:5px;
+font-size:14px;
+}
+
+.price{
+font-size:28px;
+margin-top:10px;
+}
+
+.old{
+text-decoration:line-through;
+color:gray;
+margin-left:10px;
+}
+
+.discount{
+color:green;
+font-weight:bold;
+}
+
+
+
+.rating{
+background:#388e3c;
+color:white;
+padding:3px 8px;
+border-radius:5px;
+font-size:14px;
+margin-left:10px;
+}
+
+
+
+.offer{
+background:linear-gradient(90deg,#0d47a1,#1976d2);
+color:white;
+padding:15px;
+border-radius:10px;
+margin-top:15px;
+}
+
+.offer p{
+background:#e3f2fd;
+color:black;
+padding:10px;
+border-radius:8px;
+}
+
+
+.delivery{
+margin-top:20px;
+}
+
+.box{
+background:#f5f5f5;
+padding:10px;
+border-radius:8px;
+margin-top:10px;
+}
+
+
+
+.buttons{
+margin-top:20px;
+display:flex;
+}
+
+button{
+padding:12px;
+font-size:16px;
+border-radius:8px;
+cursor:pointer;
+}
+
+.cart{
+flex:1;
+border:1px solid #ccc;
+background:white;
+}
+
+.buy{
+flex:1;
+background:#ffcc00;
+border:none;
+margin-left:10px;
+}
+
+
+
+.cart:hover{
+background:#eee;
+}
+
+.buy:hover{
+background:#ffb300;
+}
+
+
+
+@media(max-width:700px){
+
+.container{
+flex-direction:column;
+}
+
+.images img{
+width:200px;
+}
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<header>
+
+Sri Online Mart
+
+</header>
+
+<div class="container">
+
+
+<div class="images">
+
+<img id="mainImage" src="COAT.jpg" height="400px" width="900px">
+<br><br>
+<h1> ABC Custom Design </h1>
+<h2>(modern  coat office wear)</h2>
+</div>
+
+
+
+<div class="details">
+
+<span class="hot">Hot Deal</span>
+
+<h2>MODERN coat Collection</h2>
+
+<div class="price">
+
+<span class="discount">↓84%</span>
+<span class="old">₹1499</span>
+<b>₹1259</b>
+
+<span class="rating">4.3 ★</span>
+
+</div>
+
+<div class="offer">
+
+<b>WOW DEAL! Buy at ₹1259</b>
+
+<p>Apply offers for maximum savings!</p>
+
+</div>
+
+<div class="delivery">
+
+<h3>Delivery Details</h3>
+
+<div class="box">
+
+📍 Clg, Uthukkottai Subdistrict
+
+</div>
+
+<div class="box">
+
+🚚 Express Delivery in 7 days
+
+</div>
+
+<div class="box">
+
+🏪 Fulfilled by ANALOGUE INDIA  
+⭐ 4.3 rating • 9 years
+
+</div>
+
+</div>
+
+<div class="buttons">
+<a href="cart.html">
+<button class="cart" onclick="addCart()">Add to Cart</button>
+</a>
+<a href="form.html?img=coat.jpg&name=coat &price=1259">
+<button>Buy Now</button>
+</a>
+</div>
+
+</div>
+
+</div>
+
+
+</body>
+</html>

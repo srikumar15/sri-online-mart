@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Order Page</title>
+
+<style>
+body{font-family:Arial;background:#f1f3f6;margin:0;}
+
+.header{background:#2874f0;color:white;padding:15px;font-size:22px;}
+
+.container{display:flex;padding:20px;}
+
+.product-box{background:white;padding:20px;width:60%;margin-right:20px;border-radius:5px;}
+
+.product-box img{width:150px;}
+
+.summary{background:white;padding:20px;width:35%;border-radius:5px;}
+
+button{background:#fb641b;color:white;border:none;padding:12px;width:100%;cursor:pointer;}
+</style>
+</head>
+
+<body>
+
+<div class="header">Sri Online Mart</div>
+
+<div class="container">
+
+<div class="product-box">
+
+<h2>Your Order</h2>
+
+<img id="productImg">
+
+<h3 id="productName"></h3>
+
+<p>Price: ₹<span id="price"></span></p>
+
+<p>
+Quantity:
+<input type="number" id="qty" value="1" min="1" onchange="updateTotal()">
+</p>
+
+<p>Delivery by: 3-5 Days</p>
+
+</div>
+
+<div class="summary">
+
+<h2>Order Summary</h2>
+
+<p>Price: ₹<span id="price2"></span></p>
+
+<p>Quantity: <span id="qty2"></span></p>
+
+<hr>
+
+<h3>Total: ₹<span id="total"></span></h3>
+
+<p>Delivery: FREE</p>
+
+<br>
+<a href="payment.html">
+
+
+
+<button onclick="goDetails()">Place Order</button>
+
+<script>
+function goDetails(){
+let total = document.getElementById("total").innerText;
+
+window.location.href = "details.html?total=" + total;
+}
+</script>
+<script>
+function goPayment(){
+  let total = document.getElementById("total").innerText.trim();
+
+  if(total == "" || total == "0"){
+    alert("Total not calculated!");
+    return;
+  }
+
+  // DEBUG (optional)
+  console.log("Total sending:", total);
+
+  window.location.href = "payment.html?total=" + total;
+}
+
+
+// GET DATA FROM URL
+const params = new URLSearchParams(window.location.search);
+
+let img = params.get("img");
+let name = params.get("name");
+let price = parseInt(params.get("price")) || 0;
+let qty = parseInt(params.get("qty")) || 1;
+
+// SET VALUES
+document.getElementById("productImg").src = img;
+document.getElementById("productName").innerText = name;
+
+document.getElementById("price").innerText = price;
+document.getElementById("price2").innerText = price;
+
+document.getElementById("qty").value = qty;
+document.getElementById("qty2").innerText = qty;
+
+// UPDATE TOTAL
+function updateTotal(){
+    let quantity = parseInt(document.getElementById("qty").value) || 1;
+
+    document.getElementById("qty2").innerText = quantity;
+
+    let total = price * quantity;
+
+    document.getElementById("total").innerText = total;
+}
+
+// INITIAL CALL
+updateTotal();
+
+function placeOrder(){
+    alert("please fill your details");
+}
+
+
+
+
+</script>
+
+</body>
+</html>

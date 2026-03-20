@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sri Online mart - Full Store</title>
+<style>
+body { font-family: Arial,sans-serif; margin:0; background:#f5f5f5; color:#333; }
+header { background:#2874f0; color:white; padding:15px; text-align:center; font-size:22px; font-weight:bold; ; top:0; }
+section { padding:30px; max-width:1200px; margin:auto; }
+.products-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(220px,1fr)); gap:20px; }
+.product-card { background:white; border-radius:8px; padding:15px; box-shadow:0 2px 8px rgba(0,0,0,0.1); transition:0.3s; position:relative; }
+.product-card:hover { transform: translateY(-5px); box-shadow:0 5px 15px rgba(0,0,0,0.2); }
+.product-card img { width:100%; border-radius:8px; }
+.product-name { font-weight:600; margin:10px 0 5px; }
+.product-price { font-weight:bold; color:#0077ff; font-size:1.1rem; }
+.add-cart-btn { margin-top:10px; width:100%; padding:10px; border:none; border-radius:5px; background:#ff9f00; color:white; font-weight:600; cursor:pointer; }
+.add-cart-btn:hover { background:#f57c00; }
+.rating { color: #f1c40f; font-size:0.95rem; }
+.offer-badge { position:absolute; top:10px; left:10px; background:green; color:white; padding:3px 7px; border-radius:5px; font-size:0.8rem; }
+
+/* Cart Panel */
+.cart-panel { position:fixed; right:20px; bottom:20px; background:#2874f0; color:white; padding:15px; border-radius:10px; cursor:pointer; }
+.cart-count { background:#ff6161; padding:2px 6px; border-radius:50%; margin-left:5px; }
+</style>
+</head>
+<body>
+
+<header>Sri Online mart - All Products</header>
+
+<section id="shop">
+<h2>Shop Products</h2>
+<div class="products-grid" id="products"></div>
+</section>
+
+<div class="cart-panel" onclick="showCart()">🛒 Cart <span class="cart-count" id="cartCount">0</span> - ₹<span id="cartTotal">0</span></div>
+
+<script>
+// Full list of 30 products
+const products = [
+{name:"Smartphone", price:19999, img:"phone.jpg", rating:4, discount:20},
+{name:"Wireless Headphones", price:799, img:"headphone - Copy.jpg", rating:5, discount:15},
+{name:"Running Shoes", price:2999, img:"runningshoe.jpg", rating:4, discount:30},
+{name:"Smart Watch", price:599, img:"smart watch.jpg", rating:3, discount:45},
+{name:"Earbuds", price:999, img:"buds.jpg", rating:4, discount:15},
+{name:"Induction Stove", price:2999, img:"inductionstove.jpg", rating:3, discount:30},
+{name:"Refrigerator", price:7999, img:"frige.jpg", rating:4, discount:25},
+{name:"Kettle", price:750, img:"kettle.jpg", rating:5, discount:45},
+{name:"Cooker", price:1999, img:"cooker.jpg", rating:4, discount:20},
+{name:"Mixer-grinder", price:1499, img:"mixergirnder.jpg", rating:3, discount:15},
+{name:"Ironbox", price:1059, img:"ironbox.jpg", rating:4, discount:25},
+{name:"Brown Formal", price:9999, img:"lightbroen.jpg", rating:5, discount:37},
+{name:"Mouse", price:299, img:"mouse.jpg", rating:4, discount:15},
+{name:"Mike", price:499, img:"mike - Copy (5).jpg", rating:5, discount:17},
+{name:"Pink Shoe", price:799, img:"pinkshoe.jpg", rating:4, discount:15},
+{name:"Premium Shoe Wear", price:799, img:"premiumshoe.jpg", rating:4, discount:47},
+{name:"Halfsaree", price:925, img:"halfsaree.jpg", rating:4, discount:15},
+{name:"Black Formal Shoe", price:599, img:"blackformalshoe.jpg", rating:4, discount:24},
+{name:"Premium Shirt", price:359, img:"blackshirt.jpg", rating:4, discount:27},
+{name:"Kuruthi", price:1099, img:"kuruthi.jpg", rating:3, discount:15},
+{name:"White Shoe", price:1059, img:"whiteshoe.jpg", rating:4, discount:15},
+{name:"Mixer", price:1000, img:"mixer.jpg", rating:2, discount:72},
+{name:"Coat", price:1259, img:"COAT.jpg", rating:3, discount:10},
+{name:"Track Pant", price:359, img:"trackpant.jpg", rating:3, discount:80},
+{name:"Laptop", price:49999, img:"laptop.jpg", rating:5, discount:10},
+];
+
+let cart = [];
+
+function renderProducts() {
+  const container = document.getElementById("products");
+  container.innerHTML = '';
+  products.forEach((p,i)=>{
+    container.innerHTML += `
+    <div class="product-card">
+      ${p.discount>20 ? `<div class="offer-badge">HOT DEAL ${p.discount}% OFF</div>`:''}
+      <img src="${p.img}" alt="${p.name}">
+      <div class="product-name">${p.name}</div>
+      <div class="rating">${'★'.repeat(p.rating)+'☆'.repeat(5-p.rating)}</div>
+      <div class="product-price">₹${Math.round(p.price*(1-(p.discount/100)))}</div>
+      <button class="add-cart-btn" onclick="addCart(${i})">Add to Cart</button>
+    </div>
+    `;
+  });
+}
+
+function addCart(index){
+  cart.push(products[index]);
+  updateCartDisplay();
+}
+
+function updateCartDisplay(){
+  document.getElementById("cartCount").innerText = cart.length;
+  const total = cart.reduce((sum,p)=>sum+p.price*(1-p.discount/100),0);
+  document.getElementById("cartTotal").innerText = total.toFixed(0);
+}
+
+function showCart(){
+  if(cart.length===0){ alert("Cart is empty!"); return; }
+  let list = cart.map(p=>`${p.name} - ₹${Math.round(p.price*(1-p.discount/100))}`).join('\n');
+  alert(`Cart Items:\n${list}\n\nTotal: ₹${cart.reduce((sum,p)=>sum+p.price*(1-p.discount/100),0).toFixed(0)}`);
+}
+
+renderProducts();
+</script>
+
+</body>
+</html>

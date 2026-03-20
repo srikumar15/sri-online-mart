@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Customer Details</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<style>
+body{font-family:Arial;background:#f1f3f6;}
+.box{
+max-width:400px;
+margin:auto;
+background:white;
+padding:20px;
+margin-top:50px;
+border-radius:8px;
+}
+input{
+width:100%;
+padding:10px;
+margin:10px 0;
+border-radius:5px;
+border:1px solid #ccc;
+}
+button{
+background:#fb641b;
+color:white;
+border:none;
+padding:12px;
+width:100%;
+cursor:pointer;
+}
+</style>
+</head>
+
+<body>
+
+<div class="box">
+<h2>Enter Details</h2>
+
+<input type="text" id="name" placeholder="Full Name">
+<input type="text" id="phone" placeholder="Mobile Number">
+<input type="text" id="address" placeholder="Address">
+
+<button onclick="goPayment()">Continue to Payment</button>
+</div>
+
+<script>
+function goPayment(){
+
+let name = document.getElementById("name").value;
+let phone = document.getElementById("phone").value;
+let address = document.getElementById("address").value;
+
+// ✅ GET TOTAL FROM URL (from order page)
+const params = new URLSearchParams(window.location.search);
+let total = params.get("total") || 0;
+
+if(name=="" || phone=="" || address==""){
+alert("Fill all details");
+return;
+}
+
+// ✅ PASS DATA TO PAYMENT PAGE
+window.location.href =
+"payment.html?name=" + encodeURIComponent(name) +
+"&phone=" + phone +
+"&address=" + encodeURIComponent(address) +
+"&total=" + total;
+
+}
+</script>
+
+</body>
+</html>
